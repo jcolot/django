@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <form id="myform" action="" method="post" novalidate>
+    <table>
+        {{ form|crispy }}
+        <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Submit"></td>
+        </tr>
+    </table>
+    {% csrf_token %}
+    </form>
+    <script>
+    $("#myform").submit(function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var url = form.attr('action');
+        var t_and_c = $('#myform').find('input[name ="t_and_c"]').is(":checked");
+        if (t_and_c) {
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(),
+                success: function(data) {
+                    alert(data);
+                    $("#myform").replaceWith("<p>Your registration has been saved</p>");
+                }
+            });
+        } else {
+            alert("You neeed to accept the terms and conditions");
+        }
+    });
+    </script>
+{% endblock content %}
