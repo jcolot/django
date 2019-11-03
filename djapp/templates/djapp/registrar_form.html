@@ -30,9 +30,15 @@
                 type: "POST",
                 url: url,
                 data: form.serialize(),
+                error: function() {    
+                    alert("Check mandatory fields");
+                },
                 success: function(data) {
-                    alert(data);
-                    $("#myform").replaceWith("<p>Your registration has been saved</p>");
+                    if (lang == "fr") {
+                        $("#myform").replaceWith("<p>Votre demande a été enregistrée</p>");
+                    } else {
+                        $("#myform").replaceWith("<p>Your registration has been saved</p>");
+                    }
                 }
             });
         } else {

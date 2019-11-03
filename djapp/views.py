@@ -16,3 +16,7 @@ class RegistrationView(CreateView):
         r = requests.post(url, data = payload, headers = headers)
         return HttpResponse(r)
 
+    def form_invalid(self, form):
+        return HttpResponse(status=400)
+        #return HttpResponse(form.errors.as_json())
+
