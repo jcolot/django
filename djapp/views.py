@@ -11,7 +11,7 @@ class RegistrationView(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         url = 'http://www.mocky.io/v2/5db6b5f42f000058007fe988'
-        payload = {'name': 'test'}
+        payload = {'name': form.data['name']}
         headers = {'authentication-token': 'my-token'}
         r = requests.post(url, data = payload, headers = headers)
         return HttpResponse(r)

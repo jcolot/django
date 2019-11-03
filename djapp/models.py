@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 class Language(models.Model):
     name = models.CharField(max_length=32)
@@ -19,11 +20,11 @@ class Registrar(models.Model):
         (3, 'Germany')
     )
 
-    name = models.CharField(max_length=32)
-    country = models.IntegerField(choices=COUNTRIES)
-    city = models.CharField(max_length=32)
-    language = models.ManyToManyField(Language)
-    t_and_c = models.BooleanField(default=False, verbose_name="Accept terms and conditions")
+    name = models.CharField(max_length=32, verbose_name=_('name'))
+    country = models.IntegerField(choices=COUNTRIES, verbose_name=_('country'))
+    city = models.CharField(max_length=32, verbose_name=_('city'))
+    language = models.ManyToManyField(Language, verbose_name=_('language'))
+    t_and_c = models.BooleanField(default=False, verbose_name=_("Accept terms and conditions"))
 
     class Meta:
         app_label = 'djapp'
